@@ -73,8 +73,4 @@ const layers = [
   }
 ];
 
-// layers.forEach(element => {
-//   console.log('element', element.elements);
-// });
-
 module.exports = layers;
