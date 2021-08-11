@@ -1,29 +1,29 @@
-const fs = require("fs");
+const fs = require('fs');
 
 const dir = __dirname;
 const deafultPosition = { x: 0, y: 0 };
 const width = 500;
 const height = 500;
 
-const getFileName = (fileName) => {
-  return fileName.replace(/.png/g, "");
+const getFileName = fileName => {
+  return fileName.replace(/.png/g, '');
 };
 
-const getraRity = (fileName) => {
+const getraRity = fileName => {
   const regx = /rare-/g;
   return regx.test(fileName);
 };
 
-const getElements = (path) => {
+const getElements = path => {
   return fs
     .readdirSync(path)
-    .filter((item) => !/(^|\/)\.[^\/\.]/g.test(item))
+    .filter(item => !/(^|\/)\.[^\/\.]/g.test(item))
     .map((item, index) => {
       return {
-        id: index,
+        id: index + 1,
         fileName: item,
         name: getFileName(item),
-        rarity: getraRity(item),
+        rarity: getraRity(item)
       };
     });
 };
@@ -31,46 +31,50 @@ const getElements = (path) => {
 const layers = [
   {
     id: 1,
-    name: "background",
+    name: 'background',
     location: `${dir}/assets/backgrounds`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/backgrounds`),
+    elements: getElements(`${dir}/assets/backgrounds`)
   },
   {
     id: 2,
-    name: "body",
+    name: 'body',
     location: `${dir}/assets/body`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/body`),
+    elements: getElements(`${dir}/assets/body`)
   },
   {
     id: 3,
-    name: "clothes",
+    name: 'clothes',
     location: `${dir}/assets/clothes`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/clothes`),
+    elements: getElements(`${dir}/assets/clothes`)
   },
   {
     id: 4,
-    name: "eyes",
+    name: 'eyes',
     location: `${dir}/assets/eyes`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/eyes`),
+    elements: getElements(`${dir}/assets/eyes`)
   },
   {
     id: 5,
-    name: "mouth",
+    name: 'mouth',
     location: `${dir}/assets/mouths`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/mouths`),
+    elements: getElements(`${dir}/assets/mouths`)
   },
   {
     id: 6,
-    name: "materialGoods",
+    name: 'materialGoods',
     location: `${dir}/assets/materialGoods`,
     position: deafultPosition,
-    elements: getElements(`${dir}/assets/materialGoods`),
-  },
+    elements: getElements(`${dir}/assets/materialGoods`)
+  }
 ];
+
+// layers.forEach(element => {
+//   console.log('element', element.elements);
+// });
 
 module.exports = layers;

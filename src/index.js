@@ -4,7 +4,7 @@ const layers = require('./config');
 
 const canvas = createCanvas(500, 500);
 const ctx = canvas.getContext('2d');
-const edition = 10;
+const edition = 400;
 
 const saveLayer = edition => {
   fs.writeFileSync(`./src/output/${edition}set.png`, canvas.toBuffer('image/png'));
@@ -18,26 +18,8 @@ const drawLayer = async (layer, edition) => {
 };
 
 for (let i = 1; i <= edition; i++) {
-  layers.forEach((layer, index) => {
-    drawLayer(layer, index);
+  layers.forEach(layer => {
+    drawLayer(layer, i);
   });
   console.log(i, 'NFT item created! 🚀');
 }
-
-// for (let i = 1; i <= edition; i++) {
-//   let assetId = "";
-
-//   layers.forEach((layer, index) => {
-//     // console.log("layer", layer);
-//     const randomNumber = Math.floor(Math.random() * layer.elements.length);
-//     assetId += randomNumber;
-//   });
-//   if (!assets.includes(assetId)) {
-//     layer;
-//     console.log("👀", assetId);
-//     assets.push(assetId);
-//     // drawLayer(layer, i);
-//     console.log(i, "NFT item created! 🚀");
-//   }
-//   console.log("Fiish");
-// }
